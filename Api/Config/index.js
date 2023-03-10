@@ -1,6 +1,7 @@
 require("dotenv").config();
-let { createPool } = require("mysql");
-let connection = createPool({
+// let { createPool } = require("mysql");
+const mysql = require('mysql')
+let con = mysql.createConnection({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   user: process.env.DB_User,
@@ -9,4 +10,4 @@ let connection = createPool({
   multipleStatements: true,
 });
 
-module.exports = connection;
+module.exports = con;
