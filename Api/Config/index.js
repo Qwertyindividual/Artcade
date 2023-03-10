@@ -6,7 +6,7 @@ var con = mysql.createPool({
   database: process.env.Name,
   user: process.env.User,
   password: process.env.Pwd,
-  port: process.env.Port,
+  port: process.env.dbPort,
   multipleStatements: true,
 });
 

@@ -1,6 +1,6 @@
 // Import DB Connection from Config Folder
 
-const con = require("../Config/index");
+const con = require("../Config");
 
 // Import bcrypt module
 
