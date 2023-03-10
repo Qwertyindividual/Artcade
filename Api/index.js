@@ -2,8 +2,6 @@
 
 const express = require("express");
 
-let https = require('node:https')
-
 // Route
 
 const route = require("./Controllers");
@@ -47,7 +45,7 @@ app.use(
 
 // Server is running...
 
-https.createServer(app).listen(port, () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
