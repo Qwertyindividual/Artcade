@@ -1,7 +1,8 @@
 require("dotenv").config();
-const mysql = require('mysql')
+const mysql = require("mysql");
 
 var con = mysql.createPool({
+  connectionLimit: 5,
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   user: process.env.DB_User,
