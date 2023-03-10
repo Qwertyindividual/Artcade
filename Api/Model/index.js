@@ -67,7 +67,7 @@ class User {
 
   fetchUsers(req, res) {
     const strQry = `
-    SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
+    SELECT *
     FROM Users;
     `;
 
