@@ -7,7 +7,7 @@ var con = mysql.createPool({
   user: process.env.User,
   password: process.env.Pwd,
   port: process.env.dbPort,
-  multipleStatements: true,
+  multipleStatements: true
 });
 
 module.exports = con;
