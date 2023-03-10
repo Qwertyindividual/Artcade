@@ -17,76 +17,99 @@ class User {
 
   login(req, res) {
     const { emailAdd, userPass } = req.body;
-    const strQry = `
-        SELECT firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
-        FROM Users
-        WHERE emailAdd = '${emailAdd}';
-        `;
+    // const strQry = `
+    //     SELECT firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
+    //     FROM Users
+    //     WHERE emailAdd = '${emailAdd}';
+    //     `;
 
-    con.query(strQry, async (err, data) => {
-      if (err) throw err;
-      if (!data.length || data == null) {
-        res.status(401).json({ err: "You provided an invalid email address." });
-      } else {
-        await compare(userPass, data[0].userPass, (cErr, cResult) => {
-          if (cErr) throw cErr;
+    con.query(
+      `
+    SELECT firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
+    FROM Users
+    WHERE emailAdd = '${emailAdd}';
+    `,
+      async (err, data) => {
+        if (err) throw err;
+        if (!data.length || data == null) {
+          res
+            .status(401)
+            .json({ err: "You provided an invalid email address." });
+        } else {
+          await compare(userPass, data[0].userPass, (cErr, cResult) => {
+            if (cErr) throw cErr;
 
-          // Token creation
+            // Token creation
 
-          const jwToken = createToken({
-            emailAdd,
-            userPass,
-          });
-
-          // Saving
-
-          res.cookie("LegitUser", jwToken, {
-            maxAge: 3600000,
-            httpOnly: true,
-          });
-          if (cResult) {
-            res.status(200).json({
-              msg: "User logged in successfully .",
-              jwToken,
-              result: data[0],
+            const jwToken = createToken({
+              emailAdd,
+              userPass,
             });
-          } else {
-            res.status(401).json({
-              err: "You entered an invalid password or did not register as a user.",
+
+            // Saving
+
+            res.cookie("LegitUser", jwToken, {
+              maxAge: 3600000,
+              httpOnly: true,
             });
-          }
-        });
+            if (cResult) {
+              res.status(200).json({
+                msg: "User logged in successfully .",
+                jwToken,
+                result: data[0],
+              });
+            } else {
+              res.status(401).json({
+                err: "You entered an invalid password or did not register as a user.",
+              });
+            }
+          });
+        }
       }
-    });
+    );
   }
 
   // To fetch all users
 
   fetchUsers(req, res) {
-    const strQry = `
+    // const strQry = `
+    // SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
+    // FROM Users;
+    // `;
+
+    con.query(
+      `
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
     FROM Users;
-    `;
-
-    con.query(strQry, (err, data) => {
-      if (err) throw err;
-      else res.status(200).json({ results: data });
-    });
+    `,
+      (err, data) => {
+        if (err) throw err;
+        else res.status(200).json({ results: data });
+      }
+    );
   }
 
   // To fetch a single user
 
   fetchUser(req, res) {
-    const strQry = `
+    // const strQry = `
+    // SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userRole, userProfile, joinDate
+    // FROM Users
+    // WHERE userID = ?;
+    // `;
+
+    con.query(
+      `
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userRole, userProfile, joinDate
     FROM Users
     WHERE userID = ?;
-    `;
-
-    con.query(strQry, [req.params.id], (err, data) => {
-      if (err) throw err;
-      else res.status(200).json({ result: data });
-    });
+    `,
+      [req.params.id],
+      (err, data) => {
+        if (err) throw err;
+        else res.status(200).json({ result: data });
+      }
+    );
   }
 
   // To create a user
@@ -104,26 +127,33 @@ class User {
       userPass: detail.userPass,
     };
 
-    const strQry = `
-        INSERT INTO Users
-        SET ?;
-        `;
+    // const strQry = `
+    //     INSERT INTO Users
+    //     SET ?;
+    //     `;
 
-    con.query(strQry, [detail], (err) => {
-      if (err) {
-        res.status(401).json({ err });
-      } else {
-        // Token creation ---- to be saved in "cookie"
-        // Duration is measured in milliseconds
+    con.query(
+      `
+    INSERT INTO Users
+    SET ?;
+    `,
+      [detail],
+      (err) => {
+        if (err) {
+          res.status(401).json({ err });
+        } else {
+          // Token creation ---- to be saved in "cookie"
+          // Duration is measured in milliseconds
 
-        const jwToken = createToken(user);
-        res.cookie("LegitUser", jwToken, {
-          maxAge: 3600000,
-          httpOnly: true,
-        });
-        res.status(200).json({ msg: "A user record has been saved." });
+          const jwToken = createToken(user);
+          res.cookie("LegitUser", jwToken, {
+            maxAge: 3600000,
+            httpOnly: true,
+          });
+          res.status(200).json({ msg: "A user record has been saved." });
+        }
       }
-    });
+    );
   }
 
   // To update a user record
@@ -132,34 +162,49 @@ class User {
     let data = req.body;
     if (data.userPass !== null || data.userPass !== undefined)
       data.userPass = hashSync(data.userPass, 15);
-    const strQry = `
+    // const strQry = `
+    // UPDATE Users
+    // SET ?
+    // WHERE userID = ?;
+    // `;
+
+    con.query(
+      `
     UPDATE Users
     SET ?
     WHERE userID = ?;
-    `;
-
-    con.query(strQry, [data, req.params.id], (err) => {
-      if (err) throw err;
-      res.status(200).json({
-        msg: "A row was affected.",
-      });
-    });
+    `,
+      [data, req.params.id],
+      (err) => {
+        if (err) throw err;
+        res.status(200).json({
+          msg: "A row was affected.",
+        });
+      }
+    );
   }
 
   // To delete a user / user record
 
   deleteUser(req, res) {
-    const strQry = `
+    // const strQry = `
+    // DELETE FROM Users
+    // WHERE userID = ?;
+    // `;
+
+    con.query(
+      `
     DELETE FROM Users
     WHERE userID = ?;
-    `;
-
-    con.query(strQry, [req.params.id], (err) => {
-      if (err) throw err;
-      res.status(200).json({
-        msg: "A user record was deleted from a database.",
-      });
-    });
+    `,
+      [req.params.id],
+      (err) => {
+        if (err) throw err;
+        res.status(200).json({
+          msg: "A user record was deleted from a database.",
+        });
+      }
+    );
   }
 }
 
@@ -168,82 +213,116 @@ class User {
 class Product {
   // To fetch all products
   fetchProducts(req, res) {
-    const strQry = `
-        SELECT * FROM Products;
-        `;
+    // const strQry = `
+    //     SELECT * FROM Products;
+    //     `;
 
-    con.query(strQry, (err, results) => {
-      if (err) {
-        console.log(err);
+    con.query(
+      `
+    SELECT * FROM Products;
+    `,
+      (err, results) => {
+        if (err) {
+          console.log(err);
+        }
+        res.status(200).json({ results: results });
       }
-      return resolve(results)
-    //   res.status(200).json({ results: results });
-    });
+    );
   }
 
   // To fetch a single product
 
   fetchProduct(req, res) {
-    const strQry = `
+    // const strQry = `
+    // SELECT prodID, productName, prodDescription, prodCategory, Price, Quantity, imgURL
+    // FROM Products
+    // WHERE prodID = ?;
+    // `;
+
+    con.query(
+      `
     SELECT prodID, productName, prodDescription, prodCategory, Price, Quantity, imgURL
     FROM Products
     WHERE prodID = ?;
-    `;
-
-    con.query(strQry, [req.params.prodID], (err, results) => {
-      if (err) throw err;
-      res.status(200).json({ results: results });
-    });
+    `,
+      [req.params.prodID],
+      (err, results) => {
+        if (err) throw err;
+        res.status(200).json({ results: results });
+      }
+    );
   }
 
   // To add a product record
 
   addProduct(req, res) {
-    const strQry = `
+    // const strQry = `
+    // INSERT INTO Products
+    // SET ?
+    // `;
+
+    con.query(
+      `
     INSERT INTO Products
     SET ?
-    `;
-
-    con.query(strQry, [req.body], (err) => {
-      if (err) {
-        res.status(400).json({ err: "Unable to add a new product record." });
-      } else {
-        res.status(200).json({ msg: "Product record saved." });
+    `,
+      [req.body],
+      (err) => {
+        if (err) {
+          res.status(400).json({ err: "Unable to add a new product record." });
+        } else {
+          res.status(200).json({ msg: "Product record saved." });
+        }
       }
-    });
+    );
   }
 
   // To update a product record
 
   updateProduct(req, res) {
-    const strQry = `
+    // const strQry = `
+    // UPDATE Products
+    // SET ?
+    // WHERE prodID = ?;
+    // `;
+
+    con.query(
+      `
     UPDATE Products
     SET ?
     WHERE prodID = ?;
-    `;
-
-    con.query(strQry, [req.body, req.params.prodID], (err) => {
-      if (err) {
-        res.status(400).json({ err: "Unable to update a product record ." });
-      } else {
-        res.status(200).json({ msg: "Product record updated and saved." });
+    `,
+      [req.body, req.params.prodID],
+      (err) => {
+        if (err) {
+          res.status(400).json({ err: "Unable to update a product record ." });
+        } else {
+          res.status(200).json({ msg: "Product record updated and saved." });
+        }
       }
-    });
+    );
   }
 
   // To delete a product record
 
   deleteProduct(req, res) {
-    const strQry = `
+    // const strQry = `
+    // DELETE FROM Products
+    // WHERE prodID = ?;
+    // `;
+
+    con.query(
+      `
     DELETE FROM Products
     WHERE prodID = ?;
-    `;
-
-    con.query(strQry, [req.params.prodID], (err) => {
-      if (err)
-        res.status(400).json({ err: "The product record was not found." });
-      res.status(200).json({ msg: "A product record was deleted." });
-    });
+    `,
+      [req.params.prodID],
+      (err) => {
+        if (err)
+          res.status(400).json({ err: "The product record was not found." });
+        res.status(200).json({ msg: "A product record was deleted." });
+      }
+    );
   }
 }
 
@@ -251,61 +330,93 @@ class Product {
 
 class Cart {
   fetchCart(req, res) {
-    const strQry = `
-        SELECT productName, prodDescription, imgURL
-        FROM Users
-        INNER JOIN Cart ON Users.userID = Cart.userID
-        INNER JOIN Products ON Cart.prodID = Products.prodID
-        WHERE Cart.userID = ${req.params.id};
-        `;
+    // const strQry = `
+    //     SELECT productName, prodDescription, imgURL
+    //     FROM Users
+    //     INNER JOIN Cart ON Users.userID = Cart.userID
+    //     INNER JOIN Products ON Cart.prodID = Products.prodID
+    //     WHERE Cart.userID = ${req.params.id};
+    //     `;
 
-    con.query(strQry, (err, results) => {
-      if (err) throw err;
-      res.status(200).json({ results: results });
-    });
+    con.query(
+      `
+    SELECT productName, prodDescription, imgURL
+    FROM Users
+    INNER JOIN Cart ON Users.userID = Cart.userID
+    INNER JOIN Products ON Cart.prodID = Products.prodID
+    WHERE Cart.userID = ${req.params.id};
+    `,
+      (err, results) => {
+        if (err) throw err;
+        res.status(200).json({ results: results });
+      }
+    );
   }
 
   addCart(req, res) {
-    const strQry = `
+    // const strQry = `
+    // INSERT INTO Cart
+    // SET ?
+    // `;
+
+    con.query(
+      `
     INSERT INTO Cart
     SET ?
-    `;
-
-    con.query(strQry, [req.body], (err) => {
-      if (err) {
-        res.status(400).json({ err: "Unable to add a new cart record." });
-      } else {
-        res.status(200).json({ msg: "Cart record saved." });
+    `,
+      [req.body],
+      (err) => {
+        if (err) {
+          res.status(400).json({ err: "Unable to add a new cart record." });
+        } else {
+          res.status(200).json({ msg: "Cart record saved." });
+        }
       }
-    });
+    );
   }
 
   updateCart(req, res) {
-    const strQry = `
+    // const strQry = `
+    // UPDATE Cart
+    // SET ?
+    // WHERE cartID = ?;
+    // `;
+
+    con.query(
+      `
     UPDATE Cart
     SET ?
     WHERE cartID = ?;
-    `;
-
-    con.query(strQry, [req.body, req.params.id], (err) => {
-      if (err) {
-        res.status(400).json({ err: "Unable to update a cart record ." });
-      } else {
-        res.status(200).json({ msg: "Cart record updated and saved." });
+    `,
+      [req.body, req.params.id],
+      (err) => {
+        if (err) {
+          res.status(400).json({ err: "Unable to update a cart record ." });
+        } else {
+          res.status(200).json({ msg: "Cart record updated and saved." });
+        }
       }
-    });
+    );
   }
 
   deleteCart(req, res) {
-    const strQry = `
+    // const strQry = `
+    // DELETE FROM Cart
+    // WHERE cartID = ?;
+    // `;
+
+    con.query(
+      `
     DELETE FROM Cart
     WHERE cartID = ?;
-    `;
-
-    con.query(strQry, [req.params.id], (err) => {
-      if (err) res.status(400).json({ err: "The Cart record was not found." });
-      res.status(200).json({ msg: "A Cart record was deleted." });
-    });
+    `,
+      [req.params.id],
+      (err) => {
+        if (err)
+          res.status(400).json({ err: "The Cart record was not found." });
+        res.status(200).json({ msg: "A Cart record was deleted." });
+      }
+    );
   }
 }
 
