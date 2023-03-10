@@ -174,6 +174,7 @@ class Product {
 
     db.query(strQry, (err, results) => {
       if (err) throw err;
+      console.log(err),
       res.status(200).json({ results: results });
     });
   }
