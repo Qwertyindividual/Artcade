@@ -1,12 +1,12 @@
 require("dotenv").config();
-const mysql = require('mysql')
+const mysql = require("mysql")
 
 var con = mysql.createPool({
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  user: process.env.DB_User,
-  password: process.env.DB_Pwd,
-  port: process.env.DB_Port,
+  host: process.env.HOST,
+  database: process.env.NAME,
+  user: process.env.User,
+  password: process.env.Pwd,
+  port: process.env.Port,
   multipleStatements: true,
 });
 
