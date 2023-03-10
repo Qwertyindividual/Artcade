@@ -1,10 +1,10 @@
 // Controller //
 
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+const express = require("express");
+const path = require("path");
+const bodyParser = require("body-parser");
 const route = express.Router();
-const {User, Product, Cart} = require('../Model');
+const {User, Product, Cart} = require("../Model");
 
 
 // User Instance
