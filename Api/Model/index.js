@@ -1,6 +1,6 @@
 // Import DB Connection from Config Folder
 
-const db = require("../Config");
+const con = require("../Config/index");
 
 // Import bcrypt module
 
@@ -23,7 +23,7 @@ class User {
         WHERE emailAdd = '${emailAdd}';
         `;
 
-    db.query(strQry, async (err, data) => {
+    con.query(strQry, async (err, data) => {
       if (err) throw err;
       if (!data.length || data == null) {
         res.status(401).json({ err: "You provided an invalid email address." });
@@ -68,7 +68,7 @@ class User {
     FROM Users;
     `;
 
-    db.query(strQry, (err, data) => {
+    con.query(strQry, (err, data) => {
       if (err) throw err;
       else res.status(200).json({ results: data });
     });
@@ -83,7 +83,7 @@ class User {
     WHERE userID = ?;
     `;
 
-    db.query(strQry, [req.params.id], (err, data) => {
+    con.query(strQry, [req.params.id], (err, data) => {
       if (err) throw err;
       else res.status(200).json({ result: data });
     });
@@ -109,7 +109,7 @@ class User {
         SET ?;
         `;
 
-    db.query(strQry, [detail], (err) => {
+    con.query(strQry, [detail], (err) => {
       if (err) {
         res.status(401).json({ err });
       } else {
@@ -138,7 +138,7 @@ class User {
     WHERE userID = ?;
     `;
 
-    db.query(strQry, [data, req.params.id], (err) => {
+    con.query(strQry, [data, req.params.id], (err) => {
       if (err) throw err;
       res.status(200).json({
         msg: "A row was affected.",
@@ -154,7 +154,7 @@ class User {
     WHERE userID = ?;
     `;
 
-    db.query(strQry, [req.params.id], (err) => {
+    con.query(strQry, [req.params.id], (err) => {
       if (err) throw err;
       res.status(200).json({
         msg: "A user record was deleted from a database.",
@@ -172,7 +172,7 @@ class Product {
         SELECT * FROM Products;
         `;
 
-    db.query(strQry, (err, results) => {
+    con.query(strQry, (err, results) => {
       if (err) console.log(err);
       res.status(200).json({ results: results });
     });
@@ -187,7 +187,7 @@ class Product {
     WHERE prodID = ?;
     `;
 
-    db.query(strQry, [req.params.prodID], (err, results) => {
+    con.query(strQry, [req.params.prodID], (err, results) => {
       if (err) throw err;
       res.status(200).json({ results: results });
     });
@@ -201,7 +201,7 @@ class Product {
     SET ?
     `;
 
-    db.query(strQry, [req.body], (err) => {
+    con.query(strQry, [req.body], (err) => {
       if (err) {
         res.status(400).json({ err: "Unable to add a new product record." });
       } else {
@@ -219,7 +219,7 @@ class Product {
     WHERE prodID = ?;
     `;
 
-    db.query(strQry, [req.body, req.params.prodID], (err) => {
+    con.query(strQry, [req.body, req.params.prodID], (err) => {
       if (err) {
         res.status(400).json({ err: "Unable to update a product record ." });
       } else {
@@ -236,7 +236,7 @@ class Product {
     WHERE prodID = ?;
     `;
 
-    db.query(strQry, [req.params.prodID], (err) => {
+    con.query(strQry, [req.params.prodID], (err) => {
       if (err)
         res.status(400).json({ err: "The product record was not found." });
       res.status(200).json({ msg: "A product record was deleted." });
@@ -256,20 +256,19 @@ class Cart {
         WHERE Cart.userID = ${req.params.id};
         `;
 
-    db.query(strQry, (err, results) => {
+    con.query(strQry, (err, results) => {
       if (err) throw err;
       res.status(200).json({ results: results });
     });
   }
 
-  
   addCart(req, res) {
     const strQry = `
     INSERT INTO Cart
     SET ?
     `;
 
-    db.query(strQry, [req.body], (err) => {
+    con.query(strQry, [req.body], (err) => {
       if (err) {
         res.status(400).json({ err: "Unable to add a new cart record." });
       } else {
@@ -278,7 +277,6 @@ class Cart {
     });
   }
 
-
   updateCart(req, res) {
     const strQry = `
     UPDATE Cart
@@ -286,7 +284,7 @@ class Cart {
     WHERE cartID = ?;
     `;
 
-    db.query(strQry, [req.body, req.params.id], (err) => {
+    con.query(strQry, [req.body, req.params.id], (err) => {
       if (err) {
         res.status(400).json({ err: "Unable to update a cart record ." });
       } else {
@@ -295,14 +293,13 @@ class Cart {
     });
   }
 
-
   deleteCart(req, res) {
     const strQry = `
     DELETE FROM Cart
     WHERE cartID = ?;
     `;
 
-    db.query(strQry, [req.params.id], (err) => {
+    con.query(strQry, [req.params.id], (err) => {
       if (err) res.status(400).json({ err: "The Cart record was not found." });
       res.status(200).json({ msg: "A Cart record was deleted." });
     });
@@ -312,5 +309,5 @@ class Cart {
 module.exports = {
   User,
   Product,
-  Cart
+  Cart,
 };
