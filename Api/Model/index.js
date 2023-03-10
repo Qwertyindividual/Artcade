@@ -173,8 +173,11 @@ class Product {
         `;
 
     con.query(strQry, (err, results) => {
-      if (err) console.log(err);
-      res.status(200).json({ results: results });
+      if (err) {
+        return reject(err);
+      }
+      return resolve(results)
+    //   res.status(200).json({ results: results });
     });
   }
 
