@@ -45,7 +45,7 @@ app.use(
 
 // Server is running...
 
-app.listen(port, () => {
+htpps.createServer(app).listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
