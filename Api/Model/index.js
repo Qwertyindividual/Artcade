@@ -17,19 +17,13 @@ class User {
 
   login(req, res) {
     const { emailAdd, userPass } = req.body;
-    // const strQry = `
-    //     SELECT firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
-    //     FROM Users
-    //     WHERE emailAdd = '${emailAdd}';
-    //     `;
+    const strQry = `
+        SELECT firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
+        FROM Users
+        WHERE emailAdd = '${emailAdd}';
+        `;
 
-    con.query(
-      `
-    SELECT firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
-    FROM Users
-    WHERE emailAdd = '${emailAdd}';
-    `,
-      async (err, data) => {
+    con.query(strQry, async (err, data) => {
         if (err) throw err;
         if (!data.length || data == null) {
           res
@@ -72,17 +66,12 @@ class User {
   // To fetch all users
 
   fetchUsers(req, res) {
-    // const strQry = `
-    // SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
-    // FROM Users;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
     FROM Users;
-    `,
-      (err, data) => {
+    `;
+
+    con.query(strQry, (err, data) => {
         if (err) throw err;
         else res.status(200).json({ results: data });
       }
@@ -92,20 +81,13 @@ class User {
   // To fetch a single user
 
   fetchUser(req, res) {
-    // const strQry = `
-    // SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userRole, userProfile, joinDate
-    // FROM Users
-    // WHERE userID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userRole, userProfile, joinDate
     FROM Users
     WHERE userID = ?;
-    `,
-      [req.params.id],
-      (err, data) => {
+    `;
+
+    con.query(strQry, [req.params.id], (err, data) => {
         if (err) throw err;
         else res.status(200).json({ result: data });
       }
@@ -127,18 +109,12 @@ class User {
       userPass: detail.userPass,
     };
 
-    // const strQry = `
-    //     INSERT INTO Users
-    //     SET ?;
-    //     `;
+    const strQry = `
+        INSERT INTO Users
+        SET ?;
+        `;
 
-    con.query(
-      `
-    INSERT INTO Users
-    SET ?;
-    `,
-      [detail],
-      (err) => {
+    con.query(strQry, [detail], (err) => {
         if (err) {
           res.status(401).json({ err });
         } else {
@@ -162,20 +138,13 @@ class User {
     let data = req.body;
     if (data.userPass !== null || data.userPass !== undefined)
       data.userPass = hashSync(data.userPass, 15);
-    // const strQry = `
-    // UPDATE Users
-    // SET ?
-    // WHERE userID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     UPDATE Users
     SET ?
     WHERE userID = ?;
-    `,
-      [data, req.params.id],
-      (err) => {
+    `;
+
+    con.query(strQry, [data, req.params.id], (err) => {
         if (err) throw err;
         res.status(200).json({
           msg: "A row was affected.",
@@ -187,18 +156,12 @@ class User {
   // To delete a user / user record
 
   deleteUser(req, res) {
-    // const strQry = `
-    // DELETE FROM Users
-    // WHERE userID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     DELETE FROM Users
     WHERE userID = ?;
-    `,
-      [req.params.id],
-      (err) => {
+    `;
+
+    con.query(strQry, [req.params.id], (err) => {
         if (err) throw err;
         res.status(200).json({
           msg: "A user record was deleted from a database.",
@@ -213,15 +176,11 @@ class User {
 class Product {
   // To fetch all products
   fetchProducts(req, res) {
-    // const strQry = `
-    //     SELECT * FROM Products;
-    //     `;
+    const strQry = `
+        SELECT * FROM Products;
+        `;
 
-    con.query(
-      `
-    SELECT * FROM Products;
-    `,
-      (err, results) => {
+    con.query(strQry, (err, results) => {
         if (err) {
           console.log(err);
         }
@@ -233,19 +192,13 @@ class Product {
   // To fetch a single product
 
   fetchProduct(req, res) {
-    // const strQry = `
-    // SELECT prodID, productName, prodDescription, prodCategory, Price, Quantity, imgURL
-    // FROM Products
-    // WHERE prodID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     SELECT prodID, productName, prodDescription, prodCategory, Price, Quantity, imgURL
     FROM Products
     WHERE prodID = ?;
-    `,
-      [req.params.prodID],
+    `;
+
+    con.query(strQry, [req.params.prodID],
       (err, results) => {
         if (err) throw err;
         res.status(200).json({ results: results });
@@ -256,17 +209,12 @@ class Product {
   // To add a product record
 
   addProduct(req, res) {
-    // const strQry = `
-    // INSERT INTO Products
-    // SET ?
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     INSERT INTO Products
     SET ?
-    `,
-      [req.body],
+    `;
+
+    con.query(strQry, [req.body],
       (err) => {
         if (err) {
           res.status(400).json({ err: "Unable to add a new product record." });
@@ -280,19 +228,13 @@ class Product {
   // To update a product record
 
   updateProduct(req, res) {
-    // const strQry = `
-    // UPDATE Products
-    // SET ?
-    // WHERE prodID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     UPDATE Products
     SET ?
     WHERE prodID = ?;
-    `,
-      [req.body, req.params.prodID],
+    `;
+
+    con.query(strQry, [req.body, req.params.prodID],
       (err) => {
         if (err) {
           res.status(400).json({ err: "Unable to update a product record ." });
@@ -306,17 +248,12 @@ class Product {
   // To delete a product record
 
   deleteProduct(req, res) {
-    // const strQry = `
-    // DELETE FROM Products
-    // WHERE prodID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     DELETE FROM Products
     WHERE prodID = ?;
-    `,
-      [req.params.prodID],
+    `;
+
+    con.query(strQry, [req.params.prodID],
       (err) => {
         if (err)
           res.status(400).json({ err: "The product record was not found." });
@@ -330,23 +267,15 @@ class Product {
 
 class Cart {
   fetchCart(req, res) {
-    // const strQry = `
-    //     SELECT productName, prodDescription, imgURL
-    //     FROM Users
-    //     INNER JOIN Cart ON Users.userID = Cart.userID
-    //     INNER JOIN Products ON Cart.prodID = Products.prodID
-    //     WHERE Cart.userID = ${req.params.id};
-    //     `;
+    const strQry = `
+        SELECT productName, prodDescription, imgURL
+        FROM Users
+        INNER JOIN Cart ON Users.userID = Cart.userID
+        INNER JOIN Products ON Cart.prodID = Products.prodID
+        WHERE Cart.userID = ${req.params.id};
+        `;
 
-    con.query(
-      `
-    SELECT productName, prodDescription, imgURL
-    FROM Users
-    INNER JOIN Cart ON Users.userID = Cart.userID
-    INNER JOIN Products ON Cart.prodID = Products.prodID
-    WHERE Cart.userID = ${req.params.id};
-    `,
-      (err, results) => {
+    con.query(strQry ,(err, results) => {
         if (err) throw err;
         res.status(200).json({ results: results });
       }
@@ -354,17 +283,12 @@ class Cart {
   }
 
   addCart(req, res) {
-    // const strQry = `
-    // INSERT INTO Cart
-    // SET ?
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     INSERT INTO Cart
     SET ?
-    `,
-      [req.body],
+    `;
+
+    con.query(strQry, [req.body],
       (err) => {
         if (err) {
           res.status(400).json({ err: "Unable to add a new cart record." });
@@ -376,19 +300,13 @@ class Cart {
   }
 
   updateCart(req, res) {
-    // const strQry = `
-    // UPDATE Cart
-    // SET ?
-    // WHERE cartID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     UPDATE Cart
     SET ?
     WHERE cartID = ?;
-    `,
-      [req.body, req.params.id],
+    `;
+
+    con.query(strQry, [req.body, req.params.id],
       (err) => {
         if (err) {
           res.status(400).json({ err: "Unable to update a cart record ." });
@@ -400,17 +318,12 @@ class Cart {
   }
 
   deleteCart(req, res) {
-    // const strQry = `
-    // DELETE FROM Cart
-    // WHERE cartID = ?;
-    // `;
-
-    con.query(
-      `
+    const strQry = `
     DELETE FROM Cart
     WHERE cartID = ?;
-    `,
-      [req.params.id],
+    `;
+
+    con.query(strQry, [req.params.id],
       (err) => {
         if (err)
           res.status(400).json({ err: "The Cart record was not found." });
@@ -423,5 +336,5 @@ class Cart {
 module.exports = {
   User,
   Product,
-  Cart,
+  Cart
 };
