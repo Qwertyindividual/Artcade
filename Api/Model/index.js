@@ -174,7 +174,7 @@ class Product {
 
     con.query(strQry, (err, results) => {
       if (err) {
-        return reject(err);
+        console.log(err);
       }
       return resolve(results)
     //   res.status(200).json({ results: results });
