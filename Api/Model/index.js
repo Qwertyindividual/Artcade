@@ -70,7 +70,6 @@ class User {
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
     FROM Users;
     `;
-
     con.query(strQry, (err, data) => {
         if (err) throw err;
         else res.status(200).json({ results: data });
