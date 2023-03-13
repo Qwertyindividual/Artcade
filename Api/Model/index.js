@@ -65,7 +65,7 @@ class User {
 
   // To fetch all users
 
-  fetchUsers(res) {
+  fetchUsers(req, res) {
     const strQry = `
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
     FROM Users;
