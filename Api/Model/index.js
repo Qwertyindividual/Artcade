@@ -208,6 +208,7 @@ class Product {
   // To add a product record
 
   addProduct(req, res) {
+    console.log(req.body);
     const strQry = `
     INSERT INTO Products
     SET ?
@@ -267,7 +268,7 @@ class Product {
 class Cart {
   fetchCart(req, res) {
     const strQry = `
-        SELECT productName, prodDescription, imgURL
+        SELECT prodName, prodDescription, imgURL
         FROM Users
         INNER JOIN Cart ON Users.userID = Cart.userID
         INNER JOIN Products ON Cart.prodID = Products.prodID
