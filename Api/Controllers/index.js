@@ -80,13 +80,13 @@ route.get("/product/:id", (req, res) => {
 
 // To add a new product
 
-route.post("/product", bodyParser.json(), (req, res) => {
+route.post("/product", bodyParser.json(), (req,res) => {
   product.addProduct(req, res);
 });
 
 // To update a product
 
-route.put("/product/:id", bodyParser.json(), (req, res) => {
+route.put("/product/:id", bodyParser.json(), (req,res) => {
   product.updateProduct(req, res);
 });
 
