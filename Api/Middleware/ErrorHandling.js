@@ -6,7 +6,7 @@ function errorHandling(err, req, res, next) {
       res.status(status).json({
         status: status,
         err: "Oops! An error occured . Please try again later .",
-      });
+      })
     }
     next();
   }

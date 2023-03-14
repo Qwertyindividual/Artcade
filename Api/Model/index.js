@@ -197,7 +197,7 @@ class Product {
     WHERE prodID = ?;
     `;
 
-    con.query(strQry, [req.params.prodID],
+    con.query(strQry, [req.params.id],
       (err, results) => {
         if (err) throw err;
         res.status(200).json({ results: results });
@@ -233,7 +233,7 @@ class Product {
     WHERE prodID = ?;
     `;
 
-    con.query(strQry, [req.body, req.params.prodID],
+    con.query(strQry, [req.body, req.params.id],
       (err) => {
         if (err) {
           res.status(400).json({ err: "Unable to update a product record ." });
@@ -252,7 +252,7 @@ class Product {
     WHERE prodID = ?;
     `;
 
-    con.query(strQry, [req.params.prodID],
+    con.query(strQry, [req.params.id],
       (err) => {
         if (err)
           res.status(400).json({ err: "The product record was not found." });
