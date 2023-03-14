@@ -62,9 +62,7 @@ class User {
       }
     );
   }
-
   // To fetch all users
-
   fetchUsers(req, res) {
     const strQry = `
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userPass, userRole, userProfile, joinDate
@@ -78,7 +76,6 @@ class User {
   }
 
   // To fetch a single user
-
   fetchUser(req, res) {
     const strQry = `
     SELECT userID, firstName, lastName, gender, cellPhoneNumber, emailAdd, userRole, userProfile, joinDate
@@ -208,16 +205,16 @@ class Product {
   // To add a product record
 
   addProduct(req, res) {
-    console.log(req.body);
+    
     const strQry = `
     INSERT INTO Products
-    SET ?
+    SET ?;
     `;
-
+// : "Unable to add a new product record." 
     con.query(strQry, [req.body],
       (err) => {
         if (err) {
-          res.status(400).json({ err: "Unable to add a new product record." });
+          res.status(400).json({ err });
         } else {
           res.status(200).json({ msg: "Product record saved." });
         }

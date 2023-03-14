@@ -80,7 +80,7 @@ route.get("/product/:id", (req, res) => {
 
 // To add a new product
 
-route.post("/product", bodyParser.json(), (req,res) => {
+route.post("/product", bodyParser.json(), (req, res) => {
   product.addProduct(req, res);
 });
 
