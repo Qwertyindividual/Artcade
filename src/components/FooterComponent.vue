@@ -1,12 +1,11 @@
 <template>
-    <div>
         <footer>
-        <div class="container container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="single-box">
                         <img src="https://i.postimg.cc/XYSWngYD/artcade-low-resolution-logo-black-on-white-background-removebg-preview.png" alt="">
-                        <p><i>One Stop Only</i></p>
+                        <p class=""><i>One Stop Only</i></p>
                     
                     <h3>We Accept</h3>
                     <div class="card-area">
@@ -65,7 +64,6 @@
             </div>
         </div>
     </footer>
-    </div>
 </template>
 
 <script>
@@ -76,9 +74,9 @@
 
 <style scoped>
 footer {
-	background: linear-gradient(to bottom right, #D3756B, #F0997D, #FFC3A1, #205295, #2C74B3, #144272);
-	padding: 86px 0; 
-    box-shadow: 0px 0 19px rgba(1, 0, 0, 0.9);
+	background: linear-gradient(to right, #D3756B, #F0997D, #FFC3A1, #205295, #2C74B3, #144272);
+	padding: 60px 0; 
+    box-shadow: 0px 0 19px rgba(4, 4, 4, 0.9);
 
 }
 .single-content {
@@ -145,5 +143,6 @@ button {
 button:hover{
     background: linear-gradient(to right, #80ED99, #57CC99, #38A3A5);
 }
+
 
 </style>

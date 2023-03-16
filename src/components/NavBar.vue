@@ -1,7 +1,7 @@
 <template>
     <div>
         
-            <div class="row mt-2">
+            <div class="row mt-2 fixed-top one">
                 <div class="col-10">
                      <h6 class="fst-italic">ONE STOP ONLY</h6>
                 </div>
@@ -26,7 +26,7 @@
                                 class="navbar-toggler" data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse"
                                 type="button"><span class="navbar-toggler-icon"></span></button>
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+                                <ul class="navbar-nav m-auto mb-lg-0">
                                     <router-link class="text-decoration-none" to="/"><a
                                             class="Home text-dark me-3 fw-bold me-4">Home</a></router-link>
                                     <router-link class="text-decoration-none" to="/products"><a
@@ -63,4 +63,9 @@ export default {
     width: 60px;
     height: 60px;
 
-}</style>
+}
+
+.one {
+    
+}
+</style>
