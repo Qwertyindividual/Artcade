@@ -173,7 +173,8 @@ class Product {
   // To fetch all products
   fetchProducts(req, res) {
     const strQry = `
-        SELECT * FROM Products;
+        SELECT prodID, productName, prodDescription, Category, Price, Quantity, imgURL
+        FROM Products;
         `;
 
     con.query(strQry, (err, results) => {
