@@ -173,7 +173,7 @@ class Product {
   // To fetch all products
   fetchProducts(req, res) {
     const strQry = `
-        SELECT prodID, productName, prodDescription, Category, Price, Quantity, imgURL
+        SELECT id, productName, prodDescription, Category, Price, Quantity, imgURL
         FROM Products;
         `;
 
@@ -190,7 +190,7 @@ class Product {
 
   fetchProduct(req, res) {
     const strQry = `
-    SELECT prodID, productName, prodDescription, Category, Price, Quantity, imgURL
+    SELECT id, productName, prodDescription, Category, Price, Quantity, imgURL
     FROM Products
     WHERE prodID = ?;
     `;
@@ -269,7 +269,7 @@ class Cart {
         SELECT prodName, prodDescription, imgURL
         FROM Users
         INNER JOIN Cart ON Users.userID = Cart.userID
-        INNER JOIN Products ON Cart.prodID = Products.prodID
+        INNER JOIN Products ON Cart.prodID = Products.id
         WHERE Cart.userID = ${req.params.id};
         `;
 
