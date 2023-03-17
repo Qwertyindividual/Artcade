@@ -173,7 +173,7 @@ class Product {
   // To fetch all products
   fetchProducts(req, res) {
     const strQry = `
-        SELECT id, productName, prodDescription, Category, Price, Quantity, imgURL
+        SELECT id, prodName, prodDescription, Category, Price, Quantity, imgURL
         FROM Products;
         `;
 
@@ -190,7 +190,7 @@ class Product {
 
   fetchProduct(req, res) {
     const strQry = `
-    SELECT id, productName, prodDescription, Category, Price, Quantity, imgURL
+    SELECT id, prodName, prodDescription, Category, Price, Quantity, imgURL
     FROM Products
     WHERE id = ?;
     `;
