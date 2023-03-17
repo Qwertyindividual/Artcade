@@ -192,7 +192,7 @@ class Product {
     const strQry = `
     SELECT id, productName, prodDescription, Category, Price, Quantity, imgURL
     FROM Products
-    WHERE prodID = ?;
+    WHERE id = ?;
     `;
 
     con.query(strQry, [req.params.id],
@@ -229,7 +229,7 @@ class Product {
     const strQry = `
     UPDATE Products
     SET ?
-    WHERE prodID = ?;
+    WHERE id = ?;
     `;
 
     con.query(strQry, [req.body, req.params.id],
@@ -248,7 +248,7 @@ class Product {
   deleteProduct(req, res) {
     const strQry = `
     DELETE FROM Products
-    WHERE prodID = ?;
+    WHERE id = ?;
     `;
 
     con.query(strQry, [req.params.id],
@@ -269,7 +269,7 @@ class Cart {
         SELECT prodName, prodDescription, imgURL
         FROM Users
         INNER JOIN Cart ON Users.userID = Cart.userID
-        INNER JOIN Products ON Cart.prodID = Products.id
+        INNER JOIN Products ON Cart.id = Products.id
         WHERE Cart.userID = ${req.params.id};
         `;
 
