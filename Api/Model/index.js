@@ -211,7 +211,8 @@ class Product {
     INSERT INTO Products
     SET ?;
     `;
-// : "Unable to add a new product record." 
+
+    
     con.query(strQry, [req.body],
       (err) => {
         if (err) {
