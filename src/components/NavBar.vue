@@ -28,13 +28,13 @@
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav m-auto mb-lg-0">
                                     <router-link class="text-decoration-none" to="/"><a
-                                            class="Home text-dark me-3 fw-bold me-4">Home</a></router-link>
+                                            class="text-dark me-3 fw-bold me-4">Home</a></router-link>
                                     <router-link class="text-decoration-none" to="/products"><a
-                                            class="About text-dark text-center fw-bold me-4 ms-5">Products</a></router-link>
+                                            class="text-dark text-center fw-bold me-4 ms-5">Products</a></router-link>
                                     <router-link class="text-decoration-none" to="/admin"><a
-                                            class="Register text-dark me-4 ms-5 fw-bold">Admin</a></router-link>
+                                            class="text-dark me-4 ms-5 fw-bold">Admin</a></router-link>
                                     <router-link class="text-decoration-none" to="/contact"><a
-                                            class="Contact text-dark fw-bold me-4 ms-5">Contact</a></router-link>
+                                            class="text-dark fw-bold me-4 ms-5">Contact</a></router-link>
                                 </ul>
                             </div>
                         </div>
@@ -63,9 +63,5 @@ export default {
     width: 60px;
     height: 60px;
 
-}
-
-.one {
-    
 }
 </style>

@@ -1,15 +1,21 @@
 <template>
-    <div>
-
+    <div class="main">
+      <ProductCard/>
     </div>
 </template>
 
-<script lang="ts">
+<script>
+import ProductCard from "../components/ProductCard.vue"
     export default {
-        
+        components: {
+            ProductCard
+        }
     }
 </script>
 
 <style scoped>
-
+.main {
+    width: 100%;
+    height: 100vh;
+}
 </style>
