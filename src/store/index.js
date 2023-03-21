@@ -1,8 +1,10 @@
 import { createStore } from "vuex";
 import router from '@/router';
 import axios from "axios";
-import Cookies from 'vue3-cookies'
+import {useCookies} from 'vue3-cookies';
+const {cookies} = useCookies();
 import swal from 'sweetalert';
+// import toastr from 'toastr';
 const renderURL = "https://artcade.onrender.com";
 
 export default createStore({
@@ -13,14 +15,14 @@ export default createStore({
     user:null,
     token: null,
     currentUser: null,
-    registerError: null,
-    loginError: null,
+    // registerError: null,
+    // loginError: null,
     totalProductPrice: null,
     singleProductPrice: null,
     currentCart: null,
     spinner: true,
     asc: false,
-    loginStatus: false,
+    isAuthenticated: false,
     totalInCart: 0,
   },
   getters: {
@@ -50,8 +52,11 @@ export default createStore({
     setUser(state, value) {
       state.user = value;
     },
-    setToken(state, value) {
-      state.token = value
+    setToken(state, token) {
+      state.token = token
+    },
+    clearToken(state) {
+      state.token = null
     },
     SortProductsByPrice: (state) => {
       state.products.sort((a, b) => {
@@ -62,6 +67,12 @@ export default createStore({
       }
       state.asc = !state.asc;
     },
+    login(state) {
+      state.isAuthenticated = true
+    },
+    logout(state) {
+      state.isAuthenticated = false
+    }
   },
   actions: {
     async fetchUsers({ commit }) {
@@ -119,12 +130,15 @@ export default createStore({
     async register({commit}, payload) {
       try {
         const res = await axios.post(`${renderURL}/register`, payload);
-        const {result, msg, err} = await res.data;
+        const {result, err} = await res.data;
         if (result) {
           commit('setUser', result);
+          swal({
+            icon: 'success',
+            title: 'Register Successful',
+            timer: 1000
+          });
           router.push({name: 'login'});
-          commit('spinnerStatus', false);
-          commit('setMessage', msg);
         }else {
           commit('setMessage', err)
         }
@@ -135,20 +149,38 @@ export default createStore({
     async login({commit}, payload) {
       try {
         const res = await axios.post(`${renderURL}/login`, payload); 
-          const { result, jwToken,  msg, err} = await res.data
+          const { result, jwToken} = await res.data
           if(result) {
             commit('setUser', result);
             commit('setToken', jwToken);
-            Cookies.set('user_cookie_value', jwToken)
+            cookies.set('user_cookie_value', jwToken)
             router.push({name: 'home'})
-            commit('setMessage', msg);
+            swal({
+              icon: 'success',
+              title: 'Login Successful',
+              timer: 1000
+            });
           }else {
-            commit('setMessage', err);
+            swal({
+              icon: 'error',
+              title: 'Login unsuccessful',
+              timer: 1000
+            });
           }
         }catch (error) {
           console.error(error)
         }
       },
+
+      async logout({commit}) {
+        commit('clearToken')
+      },
+
+      // async authentication({commit}, token) {
+      //   const {jwToken} = token
+      // },
+
+
       async deleteUser({dispatch}, id) {
         try {
           await axios.delete(`${renderURL}/user/${id}`);
@@ -188,6 +220,74 @@ export default createStore({
 
         }
       },
+
+      async AddProduct({commit}, payload) {
+        try {
+          const res = await axios.post(`${renderURL}/product`, payload);
+          console.log('Response:' , res);
+          let { result } = await res.data;
+          if (result) {
+            commit('setProduct', result);
+            swal({
+              icon: 'success',
+              title: 'Product Added',
+              timer: 1000
+            })
+          }
+        } catch (err) {
+          swal({
+            icon: 'error',
+            title: 'Unable to add product',
+            timer: 1000
+          })
+        }
+      },
+
+
+      async AddUser({commit}, payload) {
+        try {
+          const res = await axios.post(`${renderURL}/users`, payload);
+          console.log('Response:' , res);
+          let { result } = await res.data;
+          if (result) {
+            commit('setUser', result);
+            swal({
+              icon: 'success',
+              title: 'User Added',
+              timer: 1000
+            })
+          }
+        } catch (err) {
+          swal({
+            icon: 'error',
+            title: 'Unable to add User',
+            timer: 1000
+          })
+        }
+      },
+
+      async updateUser({commit}, id, payload) {
+        try {
+          const res = await axios.put(`${renderURL}user/${id}`, payload)
+          let { msg, err} = await res.data;
+          if (msg) {
+            commit('setUser', msg);
+          } else {
+            commit('setMessage', err)
+          }
+        } catch (error) {
+          console.error(error)
+        }
+      },  
+
+      async logout({commit}) {
+        try {
+          const res = await axios.post('/logout');
+          commit('setuser', null);
+        } catch(err) {
+          swal
+        }
+      }
 
       
 

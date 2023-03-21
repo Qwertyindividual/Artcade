@@ -45,6 +45,11 @@
                                 <td data-title="CellPhone Number" class="text-dark">{{ userID.cellPhoneNumber }}</td>
                                 <td data-title="User Role" class="text-dark">{{ userID.userRole }}</td>
                                 <td data-title="Email" class="text-dark">{{ userID.emailAdd }}</td>
+                                <td data-label="Edit">
+                <UpdateUser />
+              </td>
+              <td data-label="Delete"><button @click="deleteUser(userID.userID)" type="submit"
+                  class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,6 +76,11 @@
                                 </td>
                                 <td data-title="Quantity" class="text-dark">{{ id.Quantity }}</td>
                                 <td data-title="Price" class="text-dark">R {{ id.Price }}</td>
+                                 <td data-label="Edit">
+                <UpdateProduct />
+              </td>
+              <td data-label="Delete"><button @click="deleteProduct(id.id)" type="submit"
+                  class="btn btn-danger"><i class="fa-regular fa-trash-can"></i></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -86,9 +96,13 @@
 import { computed } from '@vue/runtime-core';
 import { useStore } from 'vuex';
 import SpinnerComponent from "../components/SpinnerComponent.vue"
+import UpdateProduct from "../components/UpdateProduct.vue"
+import UpdateUser from "../components/UpdateUser.vue"
     export default {
       components: {
-        SpinnerComponent
+        SpinnerComponent,
+        UpdateProduct,
+        UpdateUser
       },
         setup(){
     const store = useStore();
@@ -105,6 +119,14 @@ import SpinnerComponent from "../components/SpinnerComponent.vue"
         products,
         spinner
       }
+  },
+  methods: {
+    deleteUser(id) {
+      this.$store.dispatch('deleteUser', id)
+    },
+    deleteProduct(id) {
+      this.$store.dispatch('deleteProduct', id)
+    }
   }
     }
 </script>
