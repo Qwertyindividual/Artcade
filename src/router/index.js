@@ -66,4 +66,8 @@ router.beforeEach((to, from, next) => {
    }
 })
 
+// const checkAgentPermissions = () => {
+//   return false
+// }
+
 export default router

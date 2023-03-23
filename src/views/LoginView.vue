@@ -7,7 +7,11 @@
           <div class="container text-center">
             <div class="row">
               <div class="col left-side">
-                <h5 class="text-start mt-5"><i>Used_Goods</i></h5>
+             
+                <br>
+                <br>
+                <br>
+                <br>
                 <br>
                 <br>
                 <br>

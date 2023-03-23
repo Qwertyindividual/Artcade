@@ -3,23 +3,32 @@
     <br> <br><br><br><br>
     <div class="container">
       <div class="row my-2">
-        <div class="col-md col-4">
+        <div class="col-md col">
+          <div class="shop">
+      <select class="btn btn-light text-start" required v-model="category">
+        <option value="" selected>All categories</option>
+        <option value="Faber-Castell">Faber-Castell</option>
+        <option value="Erasers & Statioanary">Erasers & Corrections</option>
+        <option value="Correction & Stationary">Correction & Stationary</option>
+        <option value="Office & Stationary">Office & Stationanry</option>
+      </select>
+        <div class="input-group" style="width: 15%;">
+          <input type="search" v-model="searchByName" class="form-control rounded" placeholder="Search name" aria-label="Search" aria-describedby="search-addon" />
+        </div>
+               <button class="form-control btn btn-transparent border-dark sortBtn text-center m-auto d-flex "
+            @click.prevent="SortByPrice">Price<i class="bi bi-arrow-down-up ps-4`"></i></button><br>
           <button class="form-control btn btn-transparent border-dark sortBtn text-center m-auto d-flex "
+            @click.prevent="SortByName">Name<i class="bi bi-arrow-down-up ps-4`"></i></button><br>
+   </div>
+          <!-- <button class="form-control btn btn-transparent border-dark sortBtn text-center m-auto d-flex "
             @click="SortByPrice">Price<i class="bi bi-arrow-down-up ps-4`"></i></button><br>
+          <button class="form-control btn btn-transparent border-dark sortBtn text-center m-auto d-flex "
+            @click="SortByName">Name<i class="bi bi-arrow-down-up ps-4`"></i></button><br> -->
+       </div>
+       </div>
 
-        </div>
-        <div class="col-md">
-
-          <form class="d-flex" role="search">
-            <input class="form-control me-2 bg-transparent border-dark" type="search" placeholder="Search"
-              aria-label="Search">
-            <button class="btn btn-outline-dark bg-transparent Submit" type="submit">Search</button>
-          </form>
-        </div>
-      </div>
       <div v-if="spinner">
-        <SpinnerComponent
-       />
+        <SpinnerComponent />
       </div>
       <div v-else v-for="id in products" :key="id" class="p-2 m-5 mx-auto loop" data-aos="zoom-in"
         data-aos-duration="3000">
@@ -57,28 +66,68 @@ import { useStore } from 'vuex';
 import SpinnerComponent from "../components/SpinnerComponent.vue"
 
 export default {
+
+  data() {
+    return {
+     searchByName: '',
+     category: ''
+    }
+  },
   components: {
     SpinnerComponent
-  
+
   },
   methods: {
     SortByPrice() {
       this.$store.commit("SortProductsByPrice");
+    },
+    SortByName() {
+      this.$store.commit("SortProductsByName")
     }
   },
   setup() {
     const store = useStore();
     store.dispatch("fetchProducts");
+    // store.dispatch("performSearch");
     const products =
-      computed(() => store.state.products)
+      computed(() => store.state.products);
     const spinner =
       computed(() => store.getters.spinnerStatus);
+    // const searchResults =
+    //   computed(() => store.getters.getSearchResults);
+    // const filteredProducts =
+    //   computed(() => store.getters.filteredProducts);
+
+
+    // const searchByName = (searchByName) => {
+    //   store.state.searchByName;
+    //   store.commit("setSearchByName", searchByName);
+    // };
+
+    //     const setCategory = (category) => {
+    //       store.commit('setCategory', category);
+    //       store.dispatch('performSearch');
+    // };
     return {
       products,
       spinner
+      // searchResults,
+      // searchByName,
+      // setCategory,
+      // filteredProducts
+    }
+  },
+  computed: {
+    search() {
+      let filteredByCategory = this.products.filter(item => item.Category == this.Category || this.Category == '')
+
+
+      if (this.searchByName.trim().length > 0) {
+        return filteredByCategory.filter((input) => input.prodName.toLowerCase().includes(this.searchByName.trim().toLowerCase()))
+      }
+      return filteredByCategory
     }
   }
-
 
 }
 </script>
@@ -95,4 +144,5 @@ input::placeholder {
 .Submit:hover {
   background: linear-gradient(to bottom right, #E6CCB2, #755539, pink);
 
-}</style>
+}
+</style>

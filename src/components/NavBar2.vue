@@ -2,7 +2,7 @@
     <div>
 
             <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light" v-if="isAuthenticated">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <!-- Container wrapper -->
   <div class="container-fluid">
     <!-- Toggle button -->
@@ -111,10 +111,13 @@
           aria-labelledby="navbarDropdownMenuAvatar"
         >
           <li>
-            <a class="dropdown-item" href="#">Register</a>
+            <a class="dropdown-item" href="#">My profile</a>
           </li>
           <li>
-            <a class="dropdown-item" href="#">Login</a>
+            <a class="dropdown-item" href="#">Settings</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="#">Logout</a>
           </li>
         </ul>
       </div>
@@ -124,27 +127,13 @@
   <!-- Container wrapper -->
 </nav>
 <!-- Navbar -->
-        <NavBar2 v-else/>
+        
     </div>
 </template>
 
 <script>
-import { computed } from '@vue/runtime-core';
-import { useStore } from 'vuex';
-import NavBar2 from './NavBar2.vue';
 export default {
- components: {
-    NavBar2
-},
-setup() {
-  const store = useStore();
-  const isAuthenticated =
-      computed(() => store.getters.isAuthenticated);
-
-      return{
-        isAuthenticated
-      }
-}
+ 
 }
 </script>
 
