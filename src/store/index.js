@@ -199,8 +199,9 @@ export default createStore({
     },
 
     async logout({ commit }) {
-      commit("clearToken");
+      commit("setToken", null);
       commit("setIsAuthenticated", false);
+      commit("setUser", null);
       router.push({name: "home"})
     },
 

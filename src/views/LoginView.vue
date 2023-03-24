@@ -1,31 +1,6 @@
 <template>
   <div class="main">
-    <div class="master">
-      <div class="main_container">
-
-        <div class="position-absolute top-50 start-50 translate-middle main">
-          <div class="container text-center">
-            <div class="row">
-              <div class="col left-side">
-             
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <p>Welcome Back</p>
-                <p>Please login to your Account.</p>
-                <div>
-                  <div class="container text-center">
-                    <div class="row">
-                      <div class="col">
-                        <button class="bg-transparent pt-2 pb-2"><i class="fa-brands fa-google google text-dark"></i> Sign
-                          In with Google</button> <br>
-
-                        <h5><i>Or</i></h5>
-                      </div>
+    
 
                       <form class="form">
                         <div class="row">
@@ -40,20 +15,6 @@
                           <div class="btn btn-transparent border-dark login" @click.prevent="login">Login</div>
                         </div>
                       </form>
-
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col right-side">
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
   </div>
 </template>
 

@@ -34,10 +34,6 @@
                 </div>
             </form>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
     </div>
   </div>
 </div>
@@ -58,12 +54,12 @@ data() {
     }
   }
 },
- methods: {
-            register() {
-                console.log('Debug', this.payload);
-                this.$store.dispatch('register', this.payload)
-            }
-        }
+methods: {
+  updateUser() {
+    console.log('Dedug', this.payload);
+    this.$store.dispatch('updateUser', this.payload)
+  }
+}
 }
 </script>
 

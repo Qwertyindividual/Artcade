@@ -5,12 +5,14 @@
       <div class="row my-2">
         <div class="col-md col">
           <div class="shop">
-      <select class="btn btn-light text-start" required v-model="category">
+      <select class="btn btn-light text-start" required v-model="Category">
         <option value="" selected>All categories</option>
         <option value="Faber-Castell">Faber-Castell</option>
         <option value="Erasers & Statioanary">Erasers & Corrections</option>
         <option value="Correction & Stationary">Correction & Stationary</option>
-        <option value="Office & Stationary">Office & Stationanry</option>
+        <option value="Office & Stationary">Office & Stationanry</option>a
+        <option value="Art Set">Art Set</option>
+        <option value="Graphite Pencils">Graphite Pencils"</option>
       </select>
         <div class="input-group" style="width: 15%;">
           <input type="search" v-model="searchByName" class="form-control rounded" placeholder="Search name" aria-label="Search" aria-describedby="search-addon" />
@@ -30,7 +32,7 @@
       <div v-if="spinner">
         <SpinnerComponent />
       </div>
-      <div v-else v-for="id in products" :key="id" class="p-2 m-5 mx-auto loop" data-aos="zoom-in"
+      <div v-else v-for="id in search" :key="id" class="p-2 m-5 mx-auto loop" data-aos="zoom-in"
         data-aos-duration="3000">
         <br><br>
         <div class="container text-center">
@@ -70,7 +72,7 @@ export default {
   data() {
     return {
      searchByName: '',
-     category: ''
+     Category: ''
     }
   },
   components: {
@@ -120,14 +122,14 @@ export default {
   computed: {
     search() {
       let filteredByCategory = this.products.filter(item => item.Category == this.Category || this.Category == '')
-
-
       if (this.searchByName.trim().length > 0) {
         return filteredByCategory.filter((input) => input.prodName.toLowerCase().includes(this.searchByName.trim().toLowerCase()))
       }
+      console.log("Filtered data: ", filteredByCategory);
       return filteredByCategory
     }
   }
+
 
 }
 </script>
