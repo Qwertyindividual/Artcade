@@ -5,7 +5,7 @@
     <div class="col-5">
       Column
     </div>
-    <div class="col-7 ">
+    <div class="col-7">
       <iframe src="https://my.spline.design/roomrelaxingcopy-e8e4afc415ac87b98765033bd93fbaed/" frameborder="0"></iframe>
     </div>
   </div>
@@ -26,7 +26,9 @@ export default {
 }
 
 iframe {
-    width: 500px;
-    height: 500px;
+    width: 100%;
+    height: 90vh;
+  clip-path: polygon(0 0, 100% 1%, 100% 87%, 0 88%);
+
 }
 </style>

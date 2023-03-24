@@ -27,12 +27,13 @@
             <li> <router-link class="text-decoration-none" to="/about"><a
                   class="text-dark me-3 fw-bold me-4">About</a></router-link>
             </li>
+             <li><router-link class="text-decoration-none" to="/contact"><a
+                  class="text-dark fw-bold me-4 ms-5">Contact</a></router-link>
+            </li>
             <li><router-link class="text-decoration-none" to="/products"><a
                   class="text-dark text-center fw-bold me-4 ms-5">Products</a></router-link>
             </li>
-            <li><router-link class="text-decoration-none" to="/contact"><a
-                  class="text-dark fw-bold me-4 ms-5">Contact</a></router-link>
-            </li>
+           
             <li><router-link class="text-decoration-none" to="/admin"><a
                   class="text-dark me-4 ms-5 fw-bold">Admin</a></router-link>
             </li>

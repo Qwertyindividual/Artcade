@@ -29,7 +29,7 @@ Product Card html
 	<div class="section over-hide">
 		<div class="container">
 			<div class="row full-height justify-content-center">
-				<div class="col-12 text-center align-self-center py-5">
+				<div class="col-4 text-center align-self-center py-5">
 					<div class="section text-center py-5 py-md-0">
 			
 						<div class="card-3d-wrap mx-auto">
@@ -235,3 +235,25 @@ a {
 }
 
 
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-4">
+              <div class="container text-center">
+                <div class="row">
+                  <div class="col">
+                    <div class="card bg-transparent" style="width: 18rem;">
+                      <img :src="id.imgURL" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">{{ id.prodName }}</h5>
+                        <h5 class="card-title">{{ id.Category }}</h5>
+                        <p class="card-text">{{ id.prodDescription }}</p>
+                        <router-link :to="{ name: 'product', params: { id: id.id } }"><a class="btn btn-dark">View
+                            Product</a></router-link>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

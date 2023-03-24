@@ -311,7 +311,7 @@ export default createStore({
     performSearch({ commit, state }) {
 
       
-      let filteredByCategory = state.products.filter(item => item.category == state.category || state.category == '');
+      let filteredByCategory = state.products.filter(item => item.Category == state.Category || state.Category == '');
       if (state.searchByName.trim().length > 0) {
         let searchResults = filteredByCategory.filter((input) => input.prodName.toLowerCase().includes(state.searchByName.trim().toLowerCase()));
         commit('setProducts', searchResults);
