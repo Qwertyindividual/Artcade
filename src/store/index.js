@@ -39,6 +39,9 @@ export default createStore({
     },
     filteredProducts: state => {
       return state.products;
+    },
+    user: state => {
+      return state.user
     }
   },
   mutations: {

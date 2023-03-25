@@ -20,7 +20,7 @@
 
                 <h2 class="title">User</h2>
                 <div class="row table-responsive-md">
-                    <SpinnerComponent v-if="spinner" />
+                    <SpinnerComponent v-if="spinner"/>
                     <table v-else class="table table-hover">
                         <thead class="bg-gradient">
                             <tr>
@@ -88,6 +88,7 @@
 
             </div>
         </div>
+        <FooterComponent/>
     </div>
 </template>
 
@@ -98,11 +99,13 @@ import { useStore } from 'vuex';
 import SpinnerComponent from "../components/SpinnerComponent.vue"
 import UpdateProduct from "../components/UpdateProduct.vue"
 import UpdateUser from "../components/UpdateUser.vue"
+import FooterComponent from "../components/FooterComponent.vue"
     export default {
       components: {
         SpinnerComponent,
         UpdateProduct,
-        UpdateUser
+        UpdateUser,
+        FooterComponent
       },
         setup(){
     const store = useStore();
@@ -113,7 +116,7 @@ import UpdateUser from "../components/UpdateUser.vue"
       const products = 
       computed( () => store.state.products)
       const spinner = 
-      computed( () => store.getters.spinnerStatus)
+      computed( () => store.getters.spinner)
       return{
         users,
         products,
@@ -135,7 +138,7 @@ import UpdateUser from "../components/UpdateUser.vue"
 <style scoped>
 .main {
     width: 100%;
-    height: 100vh;
+    height: vh;
 }
 
 img {

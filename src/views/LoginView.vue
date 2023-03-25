@@ -1,4 +1,5 @@
 <template>
+<div>
   <div class="main">
   <form class="p-4 w-50">
   <div class="mb-3">
@@ -12,9 +13,13 @@
   <button type="submit" class="btn btn-primary" @click.prevent="login">Login</button>
 </form>
   </div>
+  <FooterComponent/>
+</div>
 </template>
 
 <script>
+import FooterComponent from '@/components/FooterComponent.vue';
+
 export default {
   data() {
     return {
@@ -29,6 +34,9 @@ export default {
       console.log('Debug:', this.payload);
       this.$store.dispatch('login', this.payload)
     }
+  },
+  components: {
+    FooterComponent
   }
 
 }

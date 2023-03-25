@@ -61,14 +61,19 @@
     </div>
   </div>
 </div>
+<FooterComponent/>
     </div>
 </template>
 
 <script>
 import AOS from 'aos';
+import FooterComponent from "../components/FooterComponent.vue"
 export default {
   mounted() {
     AOS.init();
+  },
+  components: {
+    FooterComponent
   }
 }
 </script>
@@ -98,7 +103,7 @@ h3 {
 
 form {
   margin: 120px 0 0 70px;
-  padding-bottom: 100px;
+  padding-bottom: 20px;
 }
 
 .form-label {

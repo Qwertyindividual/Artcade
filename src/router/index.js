@@ -52,8 +52,16 @@ const routes = [
     component: () => import('../views/AdminView.vue'),
     meta: {
       requiresAuth: true
-    }
-  },
+    },
+     beforeEnter: (to, from, next) => {
+      const admin = store.getters.user.userRole == 'Admin'
+      if(admin) {
+        next()
+      }else {
+       next('/')
+      }
+     }
+    },
   {
     path: '/products',
     name: 'products',

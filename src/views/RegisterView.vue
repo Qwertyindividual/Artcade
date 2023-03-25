@@ -58,10 +58,12 @@
                 </div>
             </div>
         </div>
+        <FooterComponent/>
     </div>
 </template>
 
 <script>
+import FooterComponent from "../components/FooterComponent.vue"
 export default {
     data() {
         return {
@@ -82,6 +84,9 @@ export default {
         signUp() {
             this.$store.dispatch('register', this.payload)
         }
+    },
+    components: {
+        FooterComponent
     }
 }
 

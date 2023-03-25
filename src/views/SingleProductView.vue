@@ -1,6 +1,9 @@
 <template>
   <div class="main">
-    <div class="around">
+    <div v-if="spinner">
+      <SpinnerComponent/>
+    </div>
+    <div class="around" v-else>
       <div class="container text-center">
         <div class="row">
           <div class="col">
@@ -26,28 +29,31 @@
       <router-link to="/products"><a class="btn btn-transparent text-light border-dark mt-5 text-dark fw-bold back">Go
           Back</a></router-link>
     </div>
+    <FooterComponent/>
   </div>
 </template>
 
 <script>
 import { computed } from '@vue/runtime-core';
 import { useStore } from 'vuex';
-// import SpinnerComponent from "../components/SpinnerComponent.vue"
+import SpinnerComponent from "../components/SpinnerComponent.vue"
+import FooterComponent from "../components/FooterComponent.vue"
 
 export default {
-  // components: {
-  //   SpinnerComponent
-  // },
+  components: {
+    SpinnerComponent,
+    FooterComponent
+  },
 
   setup() {
     const store = useStore();
     const product =
       computed(() => store.state.singleProduct);
-    // const spinner =
-    //   computed(() => store.getters.spinnerStatus);
+    const spinner =
+      computed(() => store.getters.spinner);
     return {
-      product
-      // spinner
+      product,
+      spinner
     }
   },
   mounted() {
@@ -72,6 +78,10 @@ export default {
 
 }
 
+img {
+  height: 400px;
+}
+
 .description {
   font-family: 'Fantasy', cursive;
 }
@@ -84,6 +94,8 @@ export default {
   padding: 100px;
   margin-top: 80px;
   box-shadow: 18px 18px 18px 18px #888888;
+  max-width: 99%;
+  max-height: 630px;
 }
 
 .back {

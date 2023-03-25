@@ -23,15 +23,20 @@
     </div>
   </div>
 </div>
+<FooterComponent/>
   </div>
 </template>
 
 <script>
 import AOS from 'aos';
+import FooterComponent from '../components/FooterComponent.vue';
 
   export default {
     mounted() {
     AOS.init();
+  },
+  components: {
+    FooterComponent
   }
   }
 </script>
