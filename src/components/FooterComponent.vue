@@ -43,11 +43,10 @@
         <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
           <!-- Content -->
           <h6 class="text-uppercase fw-bold mb-4">
-            <i class="fas fa-gem me-3 text-secondary"></i>Company name
+            <i class="fas fa-gem me-3 text-secondary"></i>Artcade
           </h6>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+            Our website is user-friendly and easy to navigate, allowing you to quickly find the products you need. We also offer helpful tips and resources, including instructional videos and blog posts, to inspire and guide you on your artistic journey.
           </p>
         </div>
         <!-- Grid column -->
@@ -56,19 +55,19 @@
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">
-            Products
+            Categories
           </h6>
           <p>
-            <a href="#!" class="text-reset">Angular</a>
+            Graphite Pencils
           </p>
           <p>
-            <a href="#!" class="text-reset">React</a>
+            Faber-Castell
           </p>
           <p>
-            <a href="#!" class="text-reset">Vue</a>
+           Correction & Stationary
           </p>
           <p>
-            <a href="#!" class="text-reset">Laravel</a>
+           Office & Stationary
           </p>
         </div>
         <!-- Grid column -->
@@ -80,16 +79,20 @@
             Useful links
           </h6>
           <p>
-            <a href="#!" class="text-reset">Pricing</a>
+            <router-link class="text-decoration-none" to="/"><a
+                  class="text-dark text-decoration-none home">Home</a></router-link>
           </p>
           <p>
-            <a href="#!" class="text-reset">Settings</a>
+            <router-link class="text-decoration-none" to="/about"><a
+                  class="text-dark text-decoration-none home">About</a></router-link>
           </p>
           <p>
-            <a href="#!" class="text-reset">Orders</a>
+            <router-link class="text-decoration-none" to="/products"><a
+                  class="text-dark text-center text-decoration-none products">Products</a></router-link>
           </p>
           <p>
-            <a href="#!" class="text-reset">Help</a>
+            <router-link class="text-decoration-none" to="/contact"><a
+                  class="text-dark text-decoration-none contact">Contact</a></router-link>
           </p>
         </div>
         <!-- Grid column -->
@@ -98,13 +101,13 @@
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-          <p><i class="fas fa-home me-3 text-secondary"></i> New York, NY 10012, US</p>
+          <p><i class="fas fa-home me-3 text-secondary"></i> Imam Haron Road, 374</p>
           <p>
             <i class="fas fa-envelope me-3 text-secondary"></i>
-            info@example.com
+            artcade@gmail.com
           </p>
-          <p><i class="fas fa-phone me-3 text-secondary"></i> + 01 234 567 88</p>
-          <p><i class="fas fa-print me-3 text-secondary"></i> + 01 234 567 89</p>
+          <p><i class="fas fa-phone me-3 text-secondary"></i> + 65 379 0754</p>
+          <p><i class="fas fa-print me-3 text-secondary"></i> + 56 939 3728</p>
         </div>
         <!-- Grid column -->
       </div>
@@ -115,8 +118,7 @@
 
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-    © 2021 Copyright:
-    <a class="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    © 2023 Copyright | Artcade
   </div>
   <!-- Copyright -->
 </footer>
@@ -131,7 +133,6 @@
 
 <style scoped>
 footer {
-	background: linear-gradient(to right, #D3756B, #F0997D, #FFC3A1, #205295, #2C74B3, #144272);
 	padding: 60px 0; 
     box-shadow: 0px 0 19px rgba(4, 4, 4, 0.9);
 

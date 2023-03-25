@@ -96,7 +96,6 @@ iframe {
   right: 0;
   width: 1319px;
   height: 630px;
-  /* border: 3px solid #73AD21; */
   z-index: -1;
 }
 
@@ -116,7 +115,7 @@ hr {
 }
 
 .back:hover {
-  background: linear-gradient(to right, purple, violet);
+  background: linear-gradient(to right, pink, violet, lightblue);
   border: none;
 }
 </style>

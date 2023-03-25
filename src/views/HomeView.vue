@@ -1,18 +1,20 @@
 <template>
+  <div>
   <div class="master">
     <div class="container text-center">
       <div class="row">
-        <div class="col" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine">
-          <h1>Welcome to Artcade</h1>
-          <p>Artcade is a website that focuses on afforable but high-end quality art supplies.</p>
+        <div class="col description">
+          <h1 data-aos="fade-right" data-aos-offset="300">Welcome to Artcade</h1>
+          <p class="mb-4" data-aos="fade-left" data-aos-offset="300">Welcome to our online art supplies store, where you'll find everything you need to unleash your creativity and bring your artistic vision to life. We are dedicated to providing high-quality art materials at affordable prices, so you can focus on creating without breaking the bank.</p>
+          <button class="btn btn-outline"><router-link to="/about" class="text-decoration-none">Learn More...</router-link></button>
         </div>
         <div class="col">
           <iframe src="https://my.spline.design/miniroomartcopy-3f586c0ca49f1a3020ba08dc46313e40/" frameborder="0"
             width="500px" height="500px"></iframe>
         </div>
-
       </div>
     </div>
+  </div>  
   </div>
 </template>
 
@@ -43,7 +45,13 @@ p {
   font-family: 'Brush Script MT', cursive;
 }
 
-.container {
+.description {
   margin: auto;
+}
+
+button {
+  background: transparent;
+  padding: 10px 15px;
+  box-shadow: 18px 18px 18px 18px #888888;
 }
 </style>

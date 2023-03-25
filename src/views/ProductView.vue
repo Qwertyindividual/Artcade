@@ -16,6 +16,6 @@ import ProductCard from "../components/ProductCard.vue"
 <style scoped>
 .main {
     width: 100%;
-    height: 100vh;
+    height: 250vh;
 }
 </style>

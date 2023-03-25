@@ -1,6 +1,6 @@
 <template>
     <div class="div">
-      <h3 class="text-center mt-3">Connect with us</h3>
+      <h3 class="text-center mt-3" data-aos="zoom-in" data-aos-offset="300">Connect with us</h3>
         <div class="container main text-center">
   <div class="row">
     <div class="col-6">
@@ -65,8 +65,11 @@
 </template>
 
 <script>
+import AOS from 'aos';
 export default {
-
+  mounted() {
+    AOS.init();
+  }
 }
 </script>
 
