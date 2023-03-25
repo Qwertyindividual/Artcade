@@ -113,16 +113,16 @@ export default createStore({
       }
     },
 
-    async fetchProducts({ commit }) {
-      commit("spinnerStatus", true);
+    async fetchProducts(context) {
+      context.commit("spinnerStatus", true);
       const res = await axios.get(`${renderURL}/products`);
       const { results, err } = await res.data;
       if (results) {
-        commit("setProducts", results);
-        commit("spinnerStatus", false);
+        context.commit("setProducts", results);
+        context.commit("spinnerStatus", false);
       } else {
-        commit("setMessage", err);
-        commit("spinnerStatus", true);
+        context.commit("setMessage", err);
+        context.commit("spinnerStatus", true);
       }
     },
 
@@ -177,8 +177,8 @@ export default createStore({
         const { result, jwToken } = await res.data;
         if (result) {
           commit("setUser", result);
+          cookies.set("user_cookie_value", jwToken, {httpOnly: true, expire: 1});
           commit("setToken", jwToken);
-          cookies.set("user_cookie_value", jwToken);
           commit("setIsAuthenticated", true);
           router.push({ name: "products" });
           swal({
