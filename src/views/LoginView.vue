@@ -1,21 +1,5 @@
 <template>
   <div class="main">
-    
-
-                      <!-- <form class="form">
-                        <div class="row">
-                          <input class="form-control mb-2" name="email" id="email" v-model="payload.emailAdd" type="email"
-                            placeholder="Enter your email" required />
-                        </div>
-                        <div class="row">
-                          <input class="form-control mb-4" name="userpassword" id="userpassword"
-                            v-model="payload.userPass" type="password" placeholder="Enter your password" required />
-                        </div>
-                        <div class="row">
-                          <div class="btn btn-transparent border-dark login" @click.prevent="login">Login</div>
-                        </div>
-                      </form> -->
-
   <form class="p-4 w-50">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Email address</label>
@@ -59,5 +43,8 @@ export default {
 form {
   margin: auto;
   margin-top: 10%;
+}
+button:hover {
+background: linear-gradient(to right, violet, pink, lightblue);
 }
 </style>

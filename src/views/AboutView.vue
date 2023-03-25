@@ -12,8 +12,6 @@
     </div>
   </div>
 </div>
-<!-- <p class="one">Whether you're a professional artist, a hobbyist, or just starting out, we have something for everyone. Our selection includes products suitable for various mediums, such as watercolor, acrylic, oil, pastel, and charcoal. We also have a variety of tools and accessories to help you perfect your craft, such as easels, palettes, and studio organizers.</p>
-<p class="two">Our website is user-friendly and easy to navigate, allowing you to quickly find the products you need. We also offer helpful tips and resources, including instructional videos and blog posts, to inspire and guide you on your artistic journey.</p> -->
 <div class="container text-center mt-5 mb-5">
   <div class="row">
     <div class="col-6">

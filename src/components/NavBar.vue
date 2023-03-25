@@ -66,16 +66,16 @@
                 <a class="dropdown-item" href="#">Settings</a>
               </li>
               <li>
-                <a class="dropdown-item" href="#">Logout</a>
+                <router-link :to="{name: 'logout'}" class="text-decoration-none"><button class="btn dropdown-item">Logout</button></router-link>
               </li>
               </div>
 
               <div v-else>
-                <li><router-link class="text-decoration-none" to="/register"><a
-                  class="text-dark">Register</a></router-link>
+                <li class=""><router-link class="text-decoration-none dropdown-item" to="/register"><a
+                  class="text-dark text-decoration-none">Register</a></router-link>
             </li>
-            <li><router-link class="text-decoration-none" to="/login"><a
-                  class="text-dark" @click.prevent="logout">Login</a></router-link>
+            <li>
+              <a class="dropdown-item" href="/login">Login</a>
             </li>
               </div>
           

@@ -41,7 +41,7 @@
   
  
     <div class="col-12">
-    <button type="submit" class="btn btn-light submit bg-transparent ps-4 pe-4">Submit</button>
+    <button type="submit" class="btn btn-light submit bg-transparent">Submit</button>
    
       </div> 
 
@@ -92,7 +92,7 @@ h3 {
 
 .main {
   margin-top: 80px;
-  background: linear-gradient(to right, pink, yellow, orangered);
+  background: linear-gradient(to right, pink, lightblue, violet);
   box-shadow: 10px 10px 10px 10px rgb(162, 162, 162);
 }
 

@@ -82,12 +82,6 @@
                         <div class="img-wrap img-2">
                          <img src="https://i.postimg.cc/9QHqpktz/coloured-pencils-removebg-preview.png" alt="">
                         </div>
-                        <div class="img-wrap img-6">
-                          <img
-                            src="https://assets.codepen.io/1462889/Stone.png"
-                            alt=""
-                          />
-                        </div>
                       </div>
                     </div>
                   </div>

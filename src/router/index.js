@@ -29,6 +29,16 @@ const routes = [
     component: () => import('../views/LoginView.vue')
   },
   {
+    path: '/logout',
+    name: 'logout',
+    beforeEnter() {
+      router.push({name: 'login'})
+      localStorage.removeItem('loginToken')
+      localStorage.removeItem('userToken')
+      window.location.reload()
+    }
+  },
+  {
     path: '/product/:id',
     name: 'product',
     component: () => import('../views/SingleProductView.vue'),

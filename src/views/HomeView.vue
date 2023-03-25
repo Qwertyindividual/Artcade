@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style  scoped>
+<style scoped>
 iframe {
   clip-path: polygon(0 0, 100% 1%, 100% 87%, 0 88%);
 }

@@ -1,8 +1,6 @@
 import { createStore } from "vuex";
 import router from "@/router";
 import axios from "axios";
-import { useCookies } from "vue3-cookies";
-const { cookies } = useCookies();
 import swal from "sweetalert";
 // import toastr from 'toastr';
 const renderURL = "https://artcade.onrender.com";
@@ -12,7 +10,7 @@ export default createStore({
     products: null,
     singleProduct: null,
     users: null,
-    user: null,
+    user: null || JSON.parse(localStorage.getItem('userToken')),
     token: null,
     currentUser: null,
     // registerError: null,
@@ -61,7 +59,8 @@ export default createStore({
     },
     setUser(state, user) {
       state.user = user;
-      state.userAuthenticated = true;
+      state.userAuthenticated = true,
+      localStorage.setItem('userToken', JSON.stringify(user));
     },
     setToken(state, token) {
       state.token = token
@@ -179,8 +178,9 @@ export default createStore({
         const { result, jwToken } = await res.data;
         if (result) {
           commit("setUser", result);
-          cookies.set("user_cookie_value", jwToken, {httpOnly: true, expire: 1});
-          commit("setToken", jwToken);
+          commit('theToken', jwToken);
+          localStorage.setItem('loginToken', jwToken);
+          localStorage.setItem('userToken', JSON.stringify(result));
           commit("setIsAuthenticated", true);
           router.push({ name: "products" });
           swal({
