@@ -58,7 +58,7 @@
         <div class="row">
           <div
             class="col-4 py-5"
-            v-for="id in search"
+            v-for="id in Reduce"
             :key="id"
             data-aos="zoom-in"
             data-aos-duration="3000"
@@ -133,15 +133,15 @@ export default {
     };
   },
   computed: {
-    search() {
+    Reduce() {
       let filteredByCategory = this.products?.filter(
         (item) => item.Category == this.Category || this.Category == ""
       );
-      if (this.searchByName.trim().length > 0) {
+      if (this.searchByName.length > 0) {
         return filteredByCategory?.filter((input) =>
           input.prodName
             .toLowerCase()
-            .includes(this.searchByName.trim().toLowerCase())
+            .includes(this.searchByName.toLowerCase())
         );
       }
       console.log("Filtered data: ", filteredByCategory);
