@@ -24,6 +24,7 @@ export default createStore({
     asc: true,
     desc: true,
     isAuthenticated: false,
+    userAuthenticated: null,
     totalInCart: 0,
     category: '',
     searchByName: ''
@@ -58,8 +59,9 @@ export default createStore({
     setUsers(state, values) {
       state.users = values;
     },
-    setUser(state, value) {
-      state.user = value;
+    setUser(state, user) {
+      state.user = user;
+      state.userAuthenticated = true;
     },
     setToken(state, token) {
       state.token = token

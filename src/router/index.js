@@ -31,7 +31,10 @@ const routes = [
   {
     path: '/product/:id',
     name: 'product',
-    component: () => import('../views/SingleProductView.vue')
+    component: () => import('../views/SingleProductView.vue'),
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/admin',
@@ -45,9 +48,6 @@ const routes = [
     path: '/products',
     name: 'products',
     component: () => import('../views/ProductView.vue')
-    // meta: {
-    //   requiresAuth: true
-    // }
   }
 
 ]

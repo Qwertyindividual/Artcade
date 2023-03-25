@@ -1,6 +1,6 @@
 <template>
   <div class="main">
- <div class="around">
+    <div class="around">
       <div class="container text-center">
         <div class="row">
           <div class="col">
@@ -17,7 +17,9 @@
               <hr>
             </div>
             <div class="img-wrap img-6">
-<iframe src="https://my.spline.design/componentcolorpencilscopy-79f5ee8ff6935e84f8820af49467c8d2/" frameborder="0"></iframe>            </div>
+              <iframe src="https://my.spline.design/componentcolorpencilscopy-79f5ee8ff6935e84f8820af49467c8d2/"
+                frameborder="0"></iframe>
+            </div>
           </div>
         </div>
       </div>
@@ -57,7 +59,7 @@ export default {
 <style scoped>
 .main {
   width: 100%;
-  height: 100vh;
+  height: 120vh;
 }
 
 .name {
@@ -82,7 +84,7 @@ export default {
   padding: 100px;
   margin-top: 80px;
   box-shadow: 18px 18px 18px 18px #888888;
-} 
+}
 
 .back {
   margin-left: 100px;
@@ -93,7 +95,7 @@ iframe {
   top: 0px;
   right: 0;
   width: 1319px;
-  height: 600px;
+  height: 630px;
   /* border: 3px solid #73AD21; */
   z-index: -1;
 }

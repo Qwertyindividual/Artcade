@@ -1,11 +1,11 @@
 <template>
-  <div class="">
+  <div class="main">
     <br />
     <br /><br /><br /><br />
     <div class="container">
       <div class="row my-2">
         <div class="col-md col">
-          <div class="shop">
+          <div class="shop col-6">
             <select
               class="btn btn-light text-start"
               required
@@ -24,7 +24,8 @@
               <option value="Art Set">Art Set</option>
               <option value="Graphite Pencils">Graphite Pencils"</option>
             </select>
-            <div class="input-group" style="width: 15%">
+            </div>
+            <div class="input-group col-6" style="width: 15%">
               <input
                 type="search"
                 v-model="searchByName"
@@ -47,7 +48,6 @@
               Name<i class="bi bi-arrow-down-up ps-4`"></i></button
             ><br />
           </div>
-        </div>
       </div>
 
       <div v-if="spinner">
@@ -136,9 +136,9 @@ export default {
   },
   computed: {
     search() {
-      let filteredByCategory = this.products.filter( (item) => item.Category == this.Category || this.Category == "");
+      let filteredByCategory = this.products?.filter( (item) => item.Category == this.Category || this.Category == "");
       if (this.searchByName.trim().length > 0) {
-        return filteredByCategory.filter((input) =>
+        return filteredByCategory?.filter((input) =>
           input.prodName
             .toLowerCase()
             .includes(this.searchByName.trim().toLowerCase())
@@ -214,4 +214,8 @@ body {
   height: 100vh;
 }
 
+.main {
+  width: 100%;
+  height: 120vh;
+}
 </style>

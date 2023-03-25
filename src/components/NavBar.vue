@@ -34,7 +34,7 @@
                   class="text-dark text-center fw-bold me-4 ms-5 text-decoration-none products">Products</a></router-link>
             </li>
            
-            <li><router-link class="text-decoration-none" to="/admin"><a
+            <li><router-link class="text-decoration-none" to="/admin" v-if="this.$store.state.userAuthenication"><a
                   class="text-dark me-4 ms-5 fw-bold text-decoration-none admin">Admin</a></router-link>
             </li>
           
@@ -101,7 +101,7 @@ export default {
     const user =
       computed(() => store.state.user);
     const Authenticated =
-      computed(() => store.state.isAuthenticated);
+      computed(() => store.state.userAuthenticated);
 
     return {
       user,
